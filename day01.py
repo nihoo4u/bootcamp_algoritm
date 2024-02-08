@@ -1,19 +1,16 @@
-import random
-
-num=random.randrange(1,100)
-count=0
-while True:
-    x = int(input("1~100에서의 숫자를 입력하세요"))
-    if x==num:
-        print("정답입니다")
-        break
-
-    if x>num:
-        print("값보다 큽니다")
-    else:
-        print("값보다 작습니다")
-
-    count+=1
+def add_it(x):
+    a.append(x)
+def insert_it(x,y):
+    a.append(None)
+    for i in range(len(a)-1,x,-1):
+        a[i],a[i-1]=a[i-1],a[i]
+    a[x]=y
 
 
+
+
+
+a=[1,2,3,4]
+insert_it(2,10)
+print(a)
 

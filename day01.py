@@ -1,19 +1,10 @@
-import copy
-x=[[1],2,3]
-# x=[1,2,3]
-a=x
-b=copy.deepcopy(x)
-c=x.copy()
+def factorial(x):
+    if x==1:
+        return 1
+    else:
+        return x*factorial(x-1)
 
+def combination(n,r):
+    return int(factorial(n)/(factorial(r)*factorial(n-r)))
 
-print('x',x,id(x[0]))
-print('a',a,id(a[0]))
-print('b',b,id(b[0]))
-print('c',c,id(c[0]))
-x[0].append(9)
-# x[0]=9
-
-print('x',x,id(x[0]))
-print('a',a,id(a[0]))
-print('b',b,id(b[0]))
-print('c',c,id(c[0]))
+print(combination(5,2))

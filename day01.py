@@ -1,10 +1,19 @@
-def factorial(x):
-    if x==1:
-        return 1
+import random
+
+num=random.randrange(1,100)
+count=0
+while True:
+    x = int(input("1~100에서의 숫자를 입력하세요"))
+    if x==num:
+        print("정답입니다")
+        break
+
+    if x>num:
+        print("값보다 큽니다")
     else:
-        return x*factorial(x-1)
+        print("값보다 작습니다")
 
-def combination(n,r):
-    return int(factorial(n)/(factorial(r)*factorial(n-r)))
+    count+=1
 
-print(combination(5,2))
+
+

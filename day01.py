@@ -1,20 +1,35 @@
-coeff=[5,-2,0,1,2,4]
-string=''
-term=len(coeff)-1
-for i in range(len(coeff)): #0->3
-    if i!=0 and coeff[i]>0:
-        string+="+"
+class Node():
+    def __init__(self):
+        self.data=None
+        self.link=None
 
-    if coeff[i]!=0:
-        string+=f"{coeff[i]}x^{term}"
-    term-=1
-print(string)
+def print_nodes(start):
+    current=start
+    if current.data is None:
+        return
+    print(current.data)
+    while current.link is not None:
+        current=current.link
+        print(current.data)
 
-term=len(coeff)-1
-result=0
-x=int(input("input the number"))
-for i in range(len(coeff)):
-    result+=coeff[i]*x**term
-    term-=1
-print(result)
+head,current,pre=None,None,None
+array=["다현","정연","쯔위","사나","지효"]
+node=Node()
+node.data=array[0]
+head=node
+
+for datas in array[1:]:
+    pre=node
+    node=Node()
+    node.data=datas
+    pre.link=node
+print_nodes(head)
+
+
+
+
+
+
+
+
 

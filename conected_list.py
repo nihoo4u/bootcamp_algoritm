@@ -1,75 +1,48 @@
 class Node():
     def __init__(self):
-        self.data=None
+        self.name=None
+        self.height=None
         self.link=None
-
-array=[chr(x+96) for x in range(6)]
-node1=Node()
-node2=Node()
-node3=Node()
-node4=Node()
-node5=Node()
-
-node1.data=array[1]
-node2.data=array[2]
-node3.data=array[3]
-node4.data=array[4]
-node5.data=array[5]
-
-node1.link=node2
-node2.link=node3
-node3.link=node4
-node4.link=node5
-head=node1
-
 def print_it(x):
+    global pre,current,head,target
+    print(f"['{x.name}',{x.height}]")
     current=x
-    print(str(current.data)+"입니다")
     while current.link is not None:
+        pre=current
         current=current.link
-        print(f"{current.data}입니다")
+        print(f"['{current.name}',{current.height}]")
 
-def insert_it(find_data,inset_data):
-    global head,current,pre
-    if head.data==find_data:
-        node=Node()
-        node.data=inset_data
-        node.link=head
-        head=node
+
+def check_it(x):
+    global pre,current,head,target
+    current=x
+    if current.height<head.height:
+        current.link=head
+        head=current
         return
-
     current=head
     while current.link is not None:
         pre=current
         current=current.link
-        if current.data==find_data:
-            node=Node()
-            node.data=inset_data
-            node.link=current
-            pre.link=node
+        target=x
+        if target.height<current.height:
+            target.link=current
+            pre.link=target
             return
+    current.link=target
+
+
+
+data_array=[["지민",180],["정국",177],["뷔",183],["슈가",175],["진",179]]
+
+node=Node()
+node.name=data_array[0][0]
+node.height=data_array[0][1]
+head=node
+
+for x in range(1,len(data_array)):
     node=Node()
-    node.data=inset_data
-    current.link=node
-def del_it(delete_data):
-    global head,current,pre
-    if head.data==delete_data:
-        current=head
-        head=head.link
-        del current
-        return
-
-    current=head
-    while current.link is not None:
-        pre=current
-        current=current.link
-        if current.data==delete_data:
-            pre.link=current.link
-            del current
-            return
-
-insert_it('a','gogo')
-print_it(head)
-del_it('c')
-print("-----c is deleted-----")
+    node.name=data_array[x][0]
+    node.height=data_array[x][1]
+    check_it(node)
 print_it(head)

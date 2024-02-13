@@ -41,6 +41,13 @@ def deleteNode(deleteData) :
             del(current)
             return
 
+def find_node(find_data):
+    current=head
+
+    while current.link is not head:
+        if current.data==find_data:
+            print(current.data)
+        current=current.link
 
 
 
@@ -68,6 +75,7 @@ if __name__ == "__main__" :
 
 
     deleteNode("다현")
+    find_node('지효')
     # deleteNode("사나")
     printNodes(head)
 

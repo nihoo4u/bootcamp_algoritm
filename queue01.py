@@ -1,5 +1,3 @@
-
-
 def is_empty():
     global front,rear
     if front==rear:
@@ -8,14 +6,8 @@ def is_empty():
         return False
 def is_full():
     global front,rear,size
-    if front==-1 and rear==size-1:
+    if (rear+1)%size==front:
         return True
-    else:
-        while front!=-1:
-            for x in range(front+1,rear+1):
-                queue[x-1],queue[x]=queue[x],queue[x-1]
-            front-=1
-            rear-=1
 
 
 def enqueue(x):
@@ -24,7 +16,7 @@ def enqueue(x):
         print("bulged")
         return
     else:
-        rear+=1
+        rear=(rear+1)%size
         queue[rear]=x
 
 def dequeue():
@@ -33,11 +25,11 @@ def dequeue():
         print('it is empty')
         return
     else:
-        queue[front+1]=None
-        front+=1
+        queue[(front+1)%size]=None
+        front=(front+1)%size
 
-front=-1
-rear=-1
+front=0
+rear=0
 size=int(input("input the size"))
 queue = [None for _ in range(size)]
 while True:
@@ -48,7 +40,10 @@ while True:
     if a=='e':
         b=input("input the value")
         enqueue(b)
+        print("front: ",front,"rear: ",rear)
         print(queue)
     elif a=='d':
         dequeue()
+        print("front: ",front,"rear: ",rear)
+
         print(queue)

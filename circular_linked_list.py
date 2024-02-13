@@ -1,82 +1,45 @@
-
-## 클래스와 함수 선언 부분 ##
-class Node() :
-	def __init__ (self) :
-		self.data = None
-		self.link = None
-
-def printNodes(start) :
-    current = start
-    if current == None :
-        return
-    print(current.data, end = ' ')
-    while current.link != start:
-        current = current.link
-        print(current.data, end = ' ')
-    print()
-
-def deleteNode(deleteData) :
-    global memory, head, current, pre, last
-    if head.data == deleteData :
-
-        current = head
-        while current.link is not head:
-            current=current.link
-        temp=head
-        head=head.link
-        current.link=head
-
-
-
-        del(temp)
-        return
-
-
-    current = head                          # 첫 번째  외 노드 삭제
-    while current.link != head :
-        pre = current
-        current = current.link
-        if current.data == deleteData :
-            pre.link = current.link
-            del(current)
-            return
-
-def find_node(find_data):
-    current=head
-
+import random
+class Node():
+    def __init__(self):
+        self.data=None
+        self.link=None
+def print_it(start):
+    global pre,current,head ,num,zero
+    current=start
     while current.link is not head:
-        if current.data==find_data:
-            print(current.data)
+        print(current.data,end=' ')
         current=current.link
+    print(current.data)
+
+data_list=[random.randint(-100,100) for _ in range(7)]
+print(data_list)
+
+node=Node()
+node.data=data_list[0]
+head=node
+num=0
+zero=0
+for z in data_list[1:]:
+    pre=node
+    node=Node()
+
+    if z<0:
+        num+=1
+        z*=-1
+    elif z>0:
+        z*=-1
+    else:
+        zero+=1
+    node.data=z
 
 
 
-## 전역 변수 선언 부분 ##
-head, current, pre = None, None, None
-dataArray = ["다현", "정연", "쯔위", "사나", "지효"]
 
-## 메인 코드 부분 ##
-if __name__ == "__main__" :
-
-    node = Node()			# 첫 번째 노드
-    node.data = dataArray[0]
-    head = node
+    pre.link=node
     node.link=head
 
-    for data in dataArray[1:] :		# 두 번째 노드부터
-        pre = node
-        node = Node()
-        node.data = data
-        pre.link = node
-        node.link=head
 
 
-
-
-
-    deleteNode("다현")
-    find_node('지효')
-    # deleteNode("사나")
-    printNodes(head)
-
+print_it(head)
+print(f"음수의 개수:{num}, 0의 개수:{zero}, 양수의 개수: {7-zero-num}")
 

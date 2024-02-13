@@ -1,80 +1,54 @@
-## 함수 선언 부분 ##
-def isQueueFull() :
-    global SIZE, queue, front, rear
-    if (rear == SIZE-1 and front==-1) :
+
+
+def is_empty():
+    global front,rear
+    if front==rear:
         return True
-    elif front==-1:
+    else:
         return False
-    else :
-        lenght=front+1
-        for i in range(front+1,SIZE):
-            queue[i-lenght]=queue[i]
-            queue[i]=None
-        rear-=lenght
-        front=-1
-
-
-def isQueueEmpty() :
-    global SIZE, queue, front, rear
-    if (front == rear) :
+def is_full():
+    global front,rear,size
+    if front==-1 and rear==size-1:
         return True
-    else :
-        return False
+    else:
+        while front!=-1:
+            for x in range(front+1,rear+1):
+                queue[x-1],queue[x]=queue[x],queue[x-1]
+            front-=1
+            rear-=1
 
-def enQueue(data) :
-    global SIZE, queue, front, rear
-    if (isQueueFull()) :
-        print("큐가 꽉 찼습니다.")
+
+def enqueue(x):
+    global front,rear
+    if is_full():
+        print("bulged")
         return
-    rear += 1
-    queue[rear] = data
+    else:
+        rear+=1
+        queue[rear]=x
 
-def deQueue() :
-    global SIZE, queue, front, rear
-    if (isQueueEmpty()) :
-        print("큐가 비었습니다.")
-        return None
-    front += 1
-    data = queue[front]
-    queue[front] = None
-    return data
+def dequeue():
+    global front,rear
+    if is_empty():
+        print('it is empty')
+        return
+    else:
+        queue[front+1]=None
+        front+=1
 
+front=-1
+rear=-1
+size=int(input("input the size"))
+queue = [None for _ in range(size)]
+while True:
+    a=input('input the keyboard')
 
-def peek() :
-    global SIZE, queue, front, rear
-    if (isQueueEmpty()) :
-        print("큐가 비었습니다.")
-        return None
-    return queue[front+1]
-
-## 전역 변수 선언 부분 ##
-SIZE = int(input("큐의 크기를 입력하세요 ==> "))
-queue = [ None for _ in range(SIZE) ]
-front = rear = -1
-
-## 메인 코드 부분 ##
-if __name__ == "__main__" :
-
-    while True:
-        select = input("삽입(I)/추출(E)/확인(V)/종료(X) 중 하나를 선택 ==> ")
-
-        if select == 'X' or select == 'x' :
-            break
-        if select=='I' or select =='i' :
-            data = input("입력할 데이터 ==> ")
-            enQueue(data)
-            print("큐 상태 : ", queue)
-        elif select=='E' or select =='e' :
-            data = deQueue()
-            print("추출된 데이터 ==> ", data)
-            print("큐 상태 : ", queue)
-        elif select=='V' or select =='v' :
-            data = peek()
-            print("확인된 데이터 ==> ", data)
-            print("큐 상태 : ", queue)
-        else :
-            print("입력이 잘못됨")
-
-
-
-    print("프로그램 종료!")
+    if a=='x':
+        break
+    if a=='e':
+        b=input("input the value")
+        enqueue(b)
+        print(queue)
+    elif a=='d':
+        dequeue()
+        print(queue)

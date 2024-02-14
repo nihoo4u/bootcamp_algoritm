@@ -1,18 +1,8 @@
-def decimal_to_octal(number):
-    octal=''
-    while number>0:
-        octal=str(number%8) + octal
-        number=number//8
-    return octal
+def fibo(n):
+    if n<=1:
+        return n
 
-def recursion(number):
-    if number<8:
-        return str(number)
-    else:
-        return recursion(number//8) + str(n%8)
+    return fibo(n-1)+fibo(n-2)
 
-n=int(input("input decimal number:" ))
-print(decimal_to_octal(n))
-
-
-
+for i in range(2020):
+    print(fibo(i), end=' ')

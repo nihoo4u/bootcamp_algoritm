@@ -1,1 +1,1 @@
-# bootcamp_algoritm
+# bootcamp_algorithm

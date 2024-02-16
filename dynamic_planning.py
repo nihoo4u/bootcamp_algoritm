@@ -1,43 +1,42 @@
-#최단거리 k
-#출발 x
-#최다거리가 k인 도시를 출
-
 import sys
-from collections import deque
-n,m,k,x=map(int,sys.stdin.readline().rstrip().split())
-node=[[] for _ in range(n+1)]
-visited=[False]*(n+1)
-distance=[0]*(n+1)
-
-for _ in range(m):
-    a,b=map(int, sys.stdin.readline().rstrip().split())
-    node[a].append(b)
-def BFS(x):
-
-    queue=deque()
-    queue.append(x)
-    visited[x]=True
-    while queue:
-        x=queue.popleft()
-        for i in node[x]:
+def DFS():
+    count=0
+    current=1
+    stack=[]
+    visited=[False]*(n+1)
+    stack.append(current)
+    visited[current]=True
+    while stack:
+        next=None
+        for i in node[current]:
             if not visited[i]:
-                distance[i]=distance[x]+1
-                queue.append(i)
+                current=i
                 visited[i]=True
+                stack.append(i)
+                count+=1
+                next=current
+                break
+
+        if next is None:
+            stack.pop()
+            if not stack:
+                continue
+            current=stack[-1]
 
 
 
-BFS(x)
-check=False
-for i in range(len(distance)):
-    if distance[i]==k:
-        check=True
-        print(i)
-if not check:
-    print(-1)
+    return count
 
 
 
 
 
+n=int(input())
+m=int(input())
+node=[[] for _ in range(n+1)]
+for _ in range(m):
+    a,b=map(int,input().split())
+    node[a].append(b)
+    node[b].append(a)
 
+print(DFS())

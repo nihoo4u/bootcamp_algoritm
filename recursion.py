@@ -44,4 +44,4 @@ def transfer(x,by):
 
 
     return str(transfer(x//by,by)) + str(x%by)
-print(transfer(100,2))
+print(transfer(65535,8))

@@ -2,26 +2,25 @@ a=input("string을 입력하세요")
 stack=[]
 push_nominee=['(','[','{','<']
 pull_nominee=[')',']','}','>']
-for i in a:
-    if i in push_nominee:
-        stack.append(i)
-    elif i in pull_nominee:
-        out=stack.pop()
-        if out=='(' and i==')':
-            pass
-        elif out=='[' and i==']':
-            pass
-        elif out=='{' and i=='}':
-            pass
-        elif out=='<' and i=='>':
-            pass
+
+def check_bracket(a):
+    table={'(':')',']':'[','}':'{','>':'<'}
+    for ch in a:
+        if ch in push_nominee:
+            stack.append(ch)
+        elif ch in pull_nominee:
+           if not stack or table[ch]!=stack.pop():
+                return False
+
         else:
-            break
+            continue
 
-    else:
-        continue
 
-if not stack:
-    print("알맞습니다")
+
+
+
+if check_bracket(a):
+    print(True)
 else:
-    print("짝이 맞지 않습니다")
+    print(False)
+

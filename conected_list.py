@@ -14,7 +14,7 @@ def print_it(x):
 
 
 def check_it(x):
-    global pre,current,head,target
+    global pre,current,head
     current=x
     if current.height<head.height:
         current.link=head
@@ -24,16 +24,16 @@ def check_it(x):
     while current.link is not None:
         pre=current
         current=current.link
-        target=x
-        if target.height<current.height:
-            target.link=current
-            pre.link=target
+
+        if x.height<current.height:
+            x.link=current
+            pre.link=x
             return
-    current.link=target
+    current.link=x
 
 
 
-data_array=[["지민",180],["정국",177],["뷔",183],["슈가",175],["진",179]]
+data_array=[["지민",180],["정국",177],["뷔",183],["슈가",175],["진",179],["퀭퀭이",150]]
 
 node=Node()
 node.name=data_array[0][0]
@@ -45,4 +45,9 @@ for x in range(1,len(data_array)):
     node.name=data_array[x][0]
     node.height=data_array[x][1]
     check_it(node)
-print_it(head)
+    print_it(head)
+    print("---------")
+
+
+
+

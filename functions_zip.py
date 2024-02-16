@@ -6,3 +6,5 @@ def quick_sort(x):
     less=[z for z in remn if z<=pivot]
     more=[z for z in remn if z>pivot]
     return quick_sort(less) + [pivot] + quick_sort(more)
+
+
